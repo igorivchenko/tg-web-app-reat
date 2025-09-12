@@ -3,7 +3,7 @@ import useTelegram from '../hooks/useTelegram';
 import s from './Header.module.css';
 
 const Header = () => {
-  const { user } = useTelegram;
+  const { user } = useTelegram();
 
   return (
     <header className={s.header}>
