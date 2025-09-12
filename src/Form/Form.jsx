@@ -24,15 +24,12 @@ const Form = () => {
 
   const onChangeCountry = (evt) => {
     setCountry(evt.target.value);
-    console.log(evt.target.value);
   };
   const onChangeCity = (evt) => {
     setCity(evt.target.value);
-    console.log(evt.target.value);
   };
   const onChangeSubject = (evt) => {
     setSubject(evt.target.value);
-    console.log(evt.target.value);
   };
 
   return (
