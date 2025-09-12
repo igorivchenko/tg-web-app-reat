@@ -7,16 +7,9 @@ function App() {
     tg.ready();
   }, []);
 
-  const onClose = () => {
-    tg.close();
-  };
-
   return (
     <>
       <h1>Bot-Frontend</h1>
-      <button type="button" onClick={onClose}>
-        Закрити
-      </button>
     </>
   );
 }
