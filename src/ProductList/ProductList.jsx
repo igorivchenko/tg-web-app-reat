@@ -89,7 +89,7 @@ const ProductList = () => {
   return (
     <ul className={s.list}>
       {products.map((product) => (
-        <li>
+        <li className={s.item}>
           <ProductItem item={product} onAdd={onAdd} className="item" />
         </li>
       ))}
