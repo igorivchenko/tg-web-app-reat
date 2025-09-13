@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <h1>Bot-Frontend</h1>
+      <h1 style={{ marginBottom: '20px' }}>Bot-Frontend</h1>
       <Header />
       <Routes>
         <Route index element={<ProductList />} />
