@@ -5,6 +5,7 @@ import useTelegram from '../hooks/useTelegram';
 const Form = () => {
   const [country, setCountry] = useState('');
   const [city, setCity] = useState('');
+  const [street, setStreet] = useState('');
   const [subject, setSubject] = useState('');
   const { tg } = useTelegram();
 
@@ -12,10 +13,11 @@ const Form = () => {
     const data = {
       country,
       city,
+      street,
       subject,
     };
     tg.sendData(JSON.stringify(data));
-  }, [tg, country, city, subject]);
+  }, [tg, country, street, city, subject]);
 
   useEffect(() => {
     tg.onEvent('mainButtonClicked', onSendData);
@@ -44,6 +46,9 @@ const Form = () => {
   const onChangeCity = (evt) => {
     setCity(evt.target.value);
   };
+  const onChangeStreet = (evt) => {
+    setStreet(evt.target.value);
+  };
   const onChangeSubject = (evt) => {
     setSubject(evt.target.value);
   };
@@ -64,6 +69,13 @@ const Form = () => {
         placeholder="Місто"
         value={city}
         onChange={onChangeCity}
+      />
+      <input
+        className={s.input}
+        type="text"
+        placeholder="Вулиця"
+        value={street}
+        onChange={onChangeStreet}
       />
       <select className={s.select} value={subject} onChange={onChangeSubject}>
         <option value="phisycal">Фіз. особа</option>

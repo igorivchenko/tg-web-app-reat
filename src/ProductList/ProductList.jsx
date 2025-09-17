@@ -1,11 +1,34 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ProductItem from '../ProductItem/ProductItem';
 import s from './ProductList.module.css';
 import useTelegram from '../hooks/useTelegram';
 
 const ProductList = () => {
-  const { tg } = useTelegram();
+  const { tg, queryId } = useTelegram();
   const [addedItems, setAddedItems] = useState([]);
+
+  const onSendData = useCallback(() => {
+    const data = {
+      queryId,
+      products: addedItems,
+      totalPrice: getTotalPrice(addedItems),
+    };
+    console.log(data);
+    fetch('https://tg-bot-backend-lcxj.onrender.com/web-data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  }, [addedItems, queryId]);
+
+  useEffect(() => {
+    tg.onEvent('mainButtonClicked', onSendData);
+    return () => {
+      tg.offEvent('mainButtonClicked', onSendData);
+    };
+  }, [tg, onSendData]);
 
   const products = [
     {
@@ -89,7 +112,7 @@ const ProductList = () => {
   return (
     <ul className={s.list}>
       {products.map((product) => (
-        <li className={s.item}>
+        <li className={s.item} key={product.id}>
           <ProductItem item={product} onAdd={onAdd} className="item" />
         </li>
       ))}
